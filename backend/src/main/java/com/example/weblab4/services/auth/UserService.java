@@ -1,6 +1,7 @@
 package com.example.weblab4.services.auth;
 
 import com.example.weblab4.POJO.Requests.AuthRequest;
+import com.example.weblab4.POJO.Requests.CheckDotRequest;
 import com.example.weblab4.POJO.Responses.JwtResponse;
 import com.example.weblab4.entities.EnumRole;
 import com.example.weblab4.entities.RoleEntity;
@@ -41,6 +42,9 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    public UserEntity getUserByUsername(String username){
+        return userRepository.findByUsername(username).get();
+    }
 
     public void register(AuthRequest authRequest) throws UserAlreadyExistException {
         if (userRepository.existsByUsername(authRequest.getUsername())) {

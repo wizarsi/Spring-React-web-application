@@ -1,4 +1,4 @@
-package com.example.weblab4.controllers;
+package com.example.weblab4.controller;
 
 import com.example.weblab4.POJO.Requests.AuthRequest;
 import com.example.weblab4.exceptions.UserAlreadyExistException;

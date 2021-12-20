@@ -1,15 +1,15 @@
-package com.example.weblab4.dots;
+package com.example.weblab4.model;
 
 import com.example.weblab4.POJO.Requests.CheckDotRequest;
-import com.example.weblab4.POJO.Responses.CheckedDotResponse;
+import com.example.weblab4.entities.DotEntity;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AreaChecker {
 
-    public CheckedDotResponse checkEntry(CheckDotRequest checkDotRequest){
+    public DotEntity checkEntry(CheckDotRequest checkDotRequest){
         boolean entryValue = checkGetInto(checkDotRequest.getX(), checkDotRequest.getY(), checkDotRequest.getR());
-        return new CheckedDotResponse(checkDotRequest.getX(), checkDotRequest.getY(), checkDotRequest.getR(), entryValue);
+        return new DotEntity(checkDotRequest.getX(), checkDotRequest.getY(), checkDotRequest.getR(), entryValue);
     }
 
     public boolean checkGetInto(float x, float y, float r) {
