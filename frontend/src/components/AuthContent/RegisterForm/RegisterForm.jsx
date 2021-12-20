@@ -1,5 +1,7 @@
 import React from 'react';
 import {Navigate} from "react-router-dom";
+import MyInput from "../../UI/input/MyInput";
+import MyButton from "../../UI/button/MyButton";
 
 
 const RegisterForm = (props) => {
@@ -23,9 +25,9 @@ const RegisterForm = (props) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <input placeholder="username" name = "username" value={formValue.username} id="username" type="text" onChange={handleChange} />
-            <input placeholder="password" name = "password" value={formValue.password} id="password" type="password" onChange={handleChange} />
-            <button type="submit">Send</button>
+            <MyInput placeholder="username" name = "username" value={formValue.username} id="username" type="text" onChange={handleChange}/>
+            <MyInput placeholder="password" name = "password" value={formValue.password} id="password" type="password" onChange={handleChange}/>
+            <MyButton>Send</MyButton>
         </form>
     );
 }

@@ -1,14 +1,14 @@
 import React from "react";
 import {Navigate} from "react-router-dom";
 
-import SignupPage from "../components/pages/SignupPage/SignupPage"
+import LoginPage from "../components/pages/LoginPage/LoginPage"
 import MainPage from "../components/pages/MainPage/MainPage"
 import RegisterPage from "../components/pages/RegisterPage/RegisterPage"
 
 export const routes = [
     {
         path: "/login",
-        component: SignupPage,
+        component: LoginPage,
         isPrivate: false
     },
     {
@@ -23,7 +23,7 @@ export const routes = [
     },
     {
         path: "/",
-        component: SignupPage,
+        component: LoginPage,
         isPrivate: false
     },
 ]

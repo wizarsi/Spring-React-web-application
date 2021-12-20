@@ -1,5 +1,7 @@
 import React from 'react';
 import MyComboBox from "../../UI/combobox/MyComboBox";
+import MyInput from "../../UI/input/MyInput";
+import MyButton from "../../UI/button/MyButton";
 
 const Check = (props) => {
 
@@ -23,10 +25,11 @@ const Check = (props) => {
     return (
         <form onSubmit={handleSubmit}>
             <MyComboBox name = "x" id="x" onChange={changeX} value={props.selectedX} options={props.xValues}/>
-            <input placeholder="(-3...3)" name = "y" value={props.selectedY} id="y"
-                   type="input" onChange={changeY} />
+            <MyInput placeholder="(-3...3)" name = "y" value={props.selectedY} id="y"
+                     type="input" onChange={changeY}/>
+
             <MyComboBox onChange={changeR} value={props.selectedR} name = "r" id="r"  options={props.rValues}/>
-            <button  type="submit">Send</button>
+            <MyButton>Send</MyButton>
         </form>
     );
 }

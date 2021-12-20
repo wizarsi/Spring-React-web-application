@@ -1,5 +1,7 @@
 import React from 'react';
 import {Navigate, NavLink} from "react-router-dom";
+import MyInput from "../../UI/input/MyInput";
+import MyButton from "../../UI/button/MyButton";
 
 const LoginForm = (props) => {
     const [formValue, setFormValue] = React.useState({
@@ -20,9 +22,9 @@ const LoginForm = (props) => {
     }
     return (
         <form onSubmit={handleSubmit}>
-            <input placeholder="username" name = "username" value={formValue.username} id="username" type="text" onChange={handleChange} />
-            <input placeholder="password" name = "password" value={formValue.password} id="password" type="password" onChange={handleChange} />
-            <button type="submit">Send</button>
+            <MyInput  placeholder="username" name = "username" value={formValue.username} id="username" type="text" onChange={handleChange}/>
+            <MyInput  placeholder="password" name = "password" value={formValue.password} id="password" type="password" onChange={handleChange}/>
+            <MyButton>Send</MyButton>
             <div><NavLink to={"/register"}>creat new account</NavLink></div>
         </form>
     );
