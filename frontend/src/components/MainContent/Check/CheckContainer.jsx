@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import Check from "./Check";
-import {checkEntry, selectR, selectX, selectY} from "../../../redux/reducers/sendFormReducer";
+import {checkEntry, clearEntries, selectR, selectX, selectY} from "../../../redux/reducers/sendFormReducer";
 
 function mapStateToProps(state){
     return {
@@ -22,6 +22,7 @@ function mapDispatchToProps(dispatch){
             selectX:(value)=>dispatch(selectX(value)),
             selectY:(value)=>dispatch(selectY(value)),
             selectR:(value)=>dispatch(selectR(value)),
+            clearEntries: () => dispatch(clearEntries())
         }
     )
 

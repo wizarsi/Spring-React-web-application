@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -25,15 +26,28 @@ public class EntryEntity {
         private float y;
         private float r;
         private boolean isEntry = false;
+        private Date dateTime;
 
-        public EntryEntity(float x, float y, float r, boolean isEntry) {
+        public EntryEntity(float x, float y, float r, boolean isEntry, Date dateTime) {
                 this.x = x;
                 this.y = y;
                 this.r = r;
                 this.isEntry = isEntry;
+                this.dateTime = dateTime;
         }
 
         public EntryEntity() {
 
+        }
+
+        @Override
+        public String toString() {
+                return "EntryEntity{" +
+                        "id=" + id +
+                        ", x=" + x +
+                        ", y=" + y +
+                        ", r=" + r +
+                        ", isEntry=" + isEntry +
+                        '}';
         }
 }

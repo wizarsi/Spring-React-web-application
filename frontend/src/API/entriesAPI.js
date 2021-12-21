@@ -8,7 +8,7 @@ const axiosInstance = axios.create({
 });
 
 const entriesAPI = {
-    async checkEntry(x, y, r, token) {
+    async checkEntryRequest(x, y, r, token) {
         const data = {
             "x": x,
             "y": y,
@@ -22,13 +22,21 @@ const entriesAPI = {
         return await axiosInstance.post("check", data, config);
 
     },
-    async getDataOfEntries(token) {
+    async getEntriesRequest(token) {
         const config={
             headers:{
                 Authorization: "Bearer "+token,
             }
         }
         return await axiosInstance.get("getEntries",config);
+
+    },async clearEntriesRequest(token) {
+        const config={
+            headers:{
+                Authorization: "Bearer "+token,
+            }
+        }
+        return await axiosInstance.delete("clearEntries",config);
 
     },
 

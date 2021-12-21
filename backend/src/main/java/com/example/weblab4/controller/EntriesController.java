@@ -23,7 +23,12 @@ public class EntriesController {
 
     @GetMapping("/getEntries")
     public ResponseEntity<?> getEntries( Principal principal){
-        System.out.println(entriesService.getDots(principal.getName()).get(0));
-        return null;
+        return ResponseEntity.ok(entriesService.getDots(principal.getName()));
     }
+
+    @DeleteMapping("/clearEntries")
+    public ResponseEntity<?> clearEntries( Principal principal){
+        return ResponseEntity.ok(entriesService.deleteDots(principal.getName()));
+    }
+
 }

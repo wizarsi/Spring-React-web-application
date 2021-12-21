@@ -46,4 +46,14 @@ public class UserEntity {
     public UserEntity() {
 
     }
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", roles=" + roles +
+                ", entries=" + entries +
+                '}';
+    }
 }

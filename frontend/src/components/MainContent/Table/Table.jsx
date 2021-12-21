@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styles from "./Table.module.css"
 import Entry from "./Entry/Entry";
 
 const Table = (props) => {
-
+    useEffect(()=>{
+        props.getDataOfEntries()
+    },[])
     return (
         <div className={styles.tableContainer}>
             <table>

@@ -1,6 +1,7 @@
 package com.example.weblab4.services.entries;
 
 import com.example.weblab4.POJO.Requests.CheckDotRequest;
+import com.example.weblab4.POJO.Responses.MessageResponse;
 import com.example.weblab4.entities.EntryEntity;
 import com.example.weblab4.entities.UserEntity;
 import com.example.weblab4.model.AreaChecker;
@@ -9,6 +10,8 @@ import com.example.weblab4.services.auth.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -31,7 +34,20 @@ public class EntriesService {
 
     public List<EntryEntity> getDots(String username) {
         UserEntity userEntity = userService.getUserByUsername(username);
-        return entriesRepository.findAllByUserEntity(userEntity);
+        List<EntryEntity> entries =entriesRepository.findAllByUserEntity(userEntity);
+        Collections.sort(entries,
+                new Comparator<EntryEntity>() {
+                    @Override
+                    public int compare(EntryEntity o1, EntryEntity o2) {
+                        return o1.getDateTime().compareTo(o2.getDateTime());
+                    }
+                });
+        return entries;
+    }
+
+    public long deleteDots(String username){
+        UserEntity userEntity = userService.getUserByUsername(username);
+        return entriesRepository.deleteAllByUserEntity(userEntity);
     }
 
 }

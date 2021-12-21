@@ -1,7 +1,7 @@
 import entriesAPI from "../../API/entriesAPI";
 import {logout} from "./authReducer";
 
-const CLEAR_ENTRIES = "CLEAR_ENTRIES"
+const DELETE_ENTRIES = "DELETE_ENTRIES"
 const ADD_ENTRY = "ADD_ENTRY"
 const SET_ENTRIES = "SET_ENTRIES"
 
@@ -17,9 +17,9 @@ export function addEntry(value) {
     })
 }
 
-export function clearEntries() {
+export function deleteEntries() {
     return ({
-        type: CLEAR_ENTRIES
+        type: DELETE_ENTRIES
     })
 }
 
@@ -37,7 +37,7 @@ export default function entriesReducer(state = initialState, action = {}) {
                 ...state,
                entries:[...state.entries,action.value]
             })
-        case CLEAR_ENTRIES:
+        case DELETE_ENTRIES:
             return ({
                 ...state,
                 entries: []
@@ -52,23 +52,18 @@ export default function entriesReducer(state = initialState, action = {}) {
     }
 }
 
-export const getDataOfEntries = () => (dispatch) => {
+export const getEntries = () => (dispatch) => {
     const token = JSON.parse(localStorage.getItem("userRSWebLab4")).token
 
-    entriesAPI.getDataOfEntries()
+    entriesAPI.getEntriesRequest(token)
         .then(response => {
                 if (response.status === 200) {
                     dispatch(setEntries(response.data))
-                } else {
+                } else if(response.status === 401) {
+                    dispatch(logout())
+                }else{
                     console.log("Ошибка с кодом " + response.status)
                 }
             }
-        ).catch(response => {
-            if(response.status === 401){
-                dispatch(logout())
-            }else {
-                console.log("Ошибка с кодом " + response.status)
-
-            }
-        })
+        )
 }

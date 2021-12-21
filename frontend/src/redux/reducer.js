@@ -7,7 +7,7 @@ const {combineReducers} = require("redux");
 const reducer = combineReducers({
     auth: authReducer,
     sendForm: sendFormReducer,
-    entries: entriesReducer,
+    entriesData: entriesReducer,
 
 })
 

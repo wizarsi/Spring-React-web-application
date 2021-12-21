@@ -1,4 +1,6 @@
 import entriesAPI from "../../API/entriesAPI";
+import {addEntry, deleteEntries, setEntries} from "./entriesReducer";
+import {logout} from "./authReducer";
 
 const SELECT_X = "SELECT_X"
 const SELECT_Y = "SELECT_Y"
@@ -58,15 +60,32 @@ export default function sendFormReducer(state = initialState, action = {}) {
     }
 }
 
-export const checkEntry = () => (dispatch,getState) => {
+export const checkEntry = () => (dispatch, getState) => {
     const token = JSON.parse(localStorage.getItem("userRSWebLab4")).token
 
-    entriesAPI.checkEntry(getState().sendForm.selectedX,
+    entriesAPI.checkEntryRequest(getState().sendForm.selectedX,
         getState().sendForm.selectedY, getState().sendForm.selectedR, token)
         .then(response => {
                 if (response.status === 200) {
+                    dispatch(addEntry(response.data))
                 } else {
                     console.log("Ошибка авторизации с кодом " + response.status)
+                }
+            }
+        ).catch(response => console.log("Ошибка авторизации с кодом " + response.status))
+}
+
+export const clearEntries = () => (dispatch, getState) => {
+    const token = JSON.parse(localStorage.getItem("userRSWebLab4")).token
+
+    entriesAPI.clearEntriesRequest(token)
+        .then(response => {
+                if (response.status === 200) {
+                    dispatch(deleteEntries())
+                } else if (response.status === 401) {
+                    dispatch(logout())
+                } else {
+                    console.log("Ошибка с кодом " + response.status)
                 }
             }
         ).catch(response => console.log("Ошибка авторизации с кодом " + response.status))

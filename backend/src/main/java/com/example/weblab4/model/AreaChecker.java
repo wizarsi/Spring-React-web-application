@@ -4,12 +4,16 @@ import com.example.weblab4.POJO.Requests.CheckDotRequest;
 import com.example.weblab4.entities.EntryEntity;
 import org.springframework.stereotype.Component;
 
+import javax.xml.crypto.Data;
+import java.util.Date;
+
 @Component
 public class AreaChecker {
 
     public EntryEntity checkEntry(CheckDotRequest checkDotRequest){
         boolean entryValue = checkGetInto(checkDotRequest.getX(), checkDotRequest.getY(), checkDotRequest.getR());
-        return new EntryEntity(checkDotRequest.getX(), checkDotRequest.getY(), checkDotRequest.getR(), entryValue);
+        Date date = new Date();
+        return new EntryEntity(checkDotRequest.getX(), checkDotRequest.getY(), checkDotRequest.getR(), entryValue,date);
     }
 
     public boolean checkGetInto(float x, float y, float r) {
