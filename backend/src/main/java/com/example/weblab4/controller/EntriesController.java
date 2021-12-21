@@ -1,7 +1,6 @@
 package com.example.weblab4.controller;
 
 import com.example.weblab4.POJO.Requests.CheckDotRequest;
-import com.example.weblab4.model.DotsManaging;
 import com.example.weblab4.services.entries.EntriesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,11 +14,16 @@ import java.security.Principal;
 public class EntriesController {
 
     @Autowired
-    private DotsManaging dotsManaging;
+    private EntriesService entriesService;
 
     @PostMapping("/check")
-    public ResponseEntity<?> getApp(@RequestBody CheckDotRequest checkDotRequest, Principal principal){
-        System.out.println(principal.getName());
-        return ResponseEntity.ok(dotsManaging.addDot(checkDotRequest,principal.getName()));
+    public ResponseEntity<?> checkDot(@RequestBody CheckDotRequest checkDotRequest, Principal principal){
+        return ResponseEntity.ok(entriesService.addDot(checkDotRequest,principal.getName()));
+    }
+
+    @GetMapping("/getEntries")
+    public ResponseEntity<?> getEntries( Principal principal){
+        System.out.println(entriesService.getDots(principal.getName()).get(0));
+        return null;
     }
 }

@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="entries")
 
-public class DotEntity {
+public class EntryEntity {
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
         @JsonIgnore
@@ -26,14 +26,14 @@ public class DotEntity {
         private float r;
         private boolean isEntry = false;
 
-        public DotEntity(float x, float y, float r, boolean isEntry) {
+        public EntryEntity(float x, float y, float r, boolean isEntry) {
                 this.x = x;
                 this.y = y;
                 this.r = r;
                 this.isEntry = isEntry;
         }
 
-        public DotEntity() {
+        public EntryEntity() {
 
         }
 }

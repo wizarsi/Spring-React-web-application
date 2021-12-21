@@ -22,6 +22,15 @@ const entriesAPI = {
         return await axiosInstance.post("check", data, config);
 
     },
+    async getDataOfEntries(token) {
+        const config={
+            headers:{
+                Authorization: "Bearer "+token,
+            }
+        }
+        return await axiosInstance.get("getEntries",config);
+
+    },
 
 }
 

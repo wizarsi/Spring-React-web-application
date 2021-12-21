@@ -2,7 +2,6 @@ import React from "react";
 import {routes, AppRoute} from "./security/routes"
 
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import MyHeader from "./components/Header/MyHeader";
 import MyHeaderContainer from "./components/Header/MyHeaderContainer";
 
 const App = ()=>{

@@ -7,7 +7,6 @@ const LoginPage = () => {
 
     return (
         <div className={styles.signupWrapper}>
-            signup
             <LoginFormContainer/>
         </div>
     )

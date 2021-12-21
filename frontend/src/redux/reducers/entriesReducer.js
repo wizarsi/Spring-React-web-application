@@ -1,74 +1,74 @@
 import entriesAPI from "../../API/entriesAPI";
+import {logout} from "./authReducer";
 
-const SELECT_X = "SELECT_X"
-const SELECT_Y = "SELECT_Y"
-const SELECT_R = "SELECT_R"
+const CLEAR_ENTRIES = "CLEAR_ENTRIES"
+const ADD_ENTRY = "ADD_ENTRY"
+const SET_ENTRIES = "SET_ENTRIES"
 
 const initialState = {
-    selectedX: undefined,
-    selectedY: undefined,
-    selectedR: 1,
-    xValues: [-3, -2, -1, 0, 1, 2, 3, 4, 5],
-    yMax: 3,
-    yMin: -3,
-    rValues: [-3, -2, -1, 0, 1, 2, 3, 4, 5],
+    entries: []
 }
 
 
-export function selectX(value) {
+export function addEntry(value) {
     return ({
-        type: SELECT_X,
+        type: ADD_ENTRY,
         value
     })
 }
 
-export function selectY(value) {
+export function clearEntries() {
     return ({
-        type: SELECT_Y,
-        value
+        type: CLEAR_ENTRIES
     })
 }
 
-export function selectR(value) {
+export function setEntries(value) {
     return ({
-        type: SELECT_R,
+        type: SET_ENTRIES,
         value
     })
 }
 
 export default function entriesReducer(state = initialState, action = {}) {
     switch (action.type) {
-        case SELECT_X:
+        case ADD_ENTRY:
             return ({
                 ...state,
-                selectedX: action.value
+               entries:[...state.entries,action.value]
             })
-        case SELECT_Y:
+        case CLEAR_ENTRIES:
             return ({
                 ...state,
-                selectedY: action.value
+                entries: []
             })
-        case SELECT_R:
+        case SET_ENTRIES:
             return ({
                 ...state,
-                selectedR: action.value
+                entries: action.value
             })
         default:
             return state
     }
 }
 
-export const checkEntry = () => (dispatch,getState) => {
+export const getDataOfEntries = () => (dispatch) => {
     const token = JSON.parse(localStorage.getItem("userRSWebLab4")).token
 
-    entriesAPI.checkEntry(getState().entries.selectedX,
-        getState().entries.selectedY, getState().entries.selectedR, token)
+    entriesAPI.getDataOfEntries()
         .then(response => {
                 if (response.status === 200) {
-                    alert("успех")
+                    dispatch(setEntries(response.data))
                 } else {
-                    console.log("Ошибка авторизации с кодом " + response.status)
+                    console.log("Ошибка с кодом " + response.status)
                 }
             }
-        ).catch(response => console.log("Ошибка авторизации с кодом " + response.status))
+        ).catch(response => {
+            if(response.status === 401){
+                dispatch(logout())
+            }else {
+                console.log("Ошибка с кодом " + response.status)
+
+            }
+        })
 }

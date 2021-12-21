@@ -5,7 +5,6 @@ import RegisterFormContainer from "../../AuthContent/RegisterForm/RegisterFormCo
 const RegisterPage = ()=>{
     return (
         <div className={styles.registerWrapper}>
-            reg
             <RegisterFormContainer/>
         </div>
     )

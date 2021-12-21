@@ -36,7 +36,7 @@ public class UserEntity {
 
     @OneToMany(mappedBy = "userEntity")
     @JsonIgnore
-    private List<DotEntity> entries;
+    private List<EntryEntity> entries;
 
     public UserEntity(String name, String password) {
         this.username = name;

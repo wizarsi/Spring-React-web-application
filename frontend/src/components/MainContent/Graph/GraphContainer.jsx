@@ -4,13 +4,13 @@ import {checkEntry, selectR, selectX, selectY} from "../../../redux/reducers/sen
 
 function mapStateToProps(state){
     return {
-        selectedX: state.sendForm.selectedX,
-        selectedY: state.sendForm.selectedY,
-        selectedR: state.sendForm.selectedR,
-        xValues: state.sendForm.xValues,
-        yMax: state.sendForm.yMax,
-        yMin: state.sendForm.yMin,
-        rValues: state.sendForm.rValues
+        selectedX: state.entries.selectedX,
+        selectedY: state.entries.selectedY,
+        selectedR: state.entries.selectedR,
+        xValues: state.entries.xValues,
+        yMax: state.entries.yMax,
+        yMin: state.entries.yMin,
+        rValues: state.entries.rValues
     };
 
 }

@@ -1,4 +1,5 @@
 import authAPI from "../../API/authAPI";
+import {getDataOfEntries} from "./entriesReducer";
 
 const SET_USER_IS_LOGGED  = "SET_USER_IS_LOGGED"
 
@@ -30,6 +31,7 @@ export const login = (username,password)=>(dispatch)=>{
                 if (response.status === 200) {
                     localStorage.setItem("userRSWebLab4", JSON.stringify(response.data))
                     dispatch(setUserIsLogged(true))
+                    dispatch(getDataOfEntries())
                 } else {
                     console.log("Ошибка авторизации с кодом "+response.status)
                 }
