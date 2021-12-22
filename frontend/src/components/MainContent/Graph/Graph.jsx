@@ -1,19 +1,34 @@
 import React, {useEffect, useRef} from 'react';
+import {Toast} from "primereact/toast";
 
 const SIZE = 300
 
 const Graph = (props) => {
     const svgDots = useRef()
+    const toastRef = useRef();
+
 
     useEffect(() => {
         clearDots()
         fillPointsToArea(props.entries)
     })
 
+    const checkR = ()=>{
+        let message = "R cannot be negative or 0"
+        if (props.selectedR <= 0) {
+             toastRef.current.show({severity: "error", summary: "Error", detail: message})
+            return false
+        }
+        return true
+    }
+
     const fillPointsToArea = (entries) => {
-        entries.forEach(e => {
-            drawPoint(e.x, e.y, e.r, e.entry)
-        })
+        if (checkR()){
+            entries.forEach(e => {
+                drawPoint(e.x, e.y, e.r, e.entry)
+            })
+        }
+
     }
 
     const clearDots = () => {
@@ -52,10 +67,10 @@ const Graph = (props) => {
 
 
     const convertFromCoordinate = (value) => {
-        return (value * props.selectedR) / 120;
+        return (value * Math.abs(props.selectedR)) / 120;
     }
     const convertToCoordinate = (value) => {
-        return (value * 120) / props.selectedR;
+        return (value * 120) / Math.abs(props.selectedR);
     }
 
     const drawPoint = (x, y, r, isEntry) => {
@@ -78,16 +93,24 @@ const Graph = (props) => {
 
 
     const handleClickOnArea = (e) => {
-        const coordX = e.nativeEvent.offsetX
-        const coordY = e.nativeEvent.offsetY
-        props.selectY(convertFromCoordinate(setYSystemCoords(coordY)))
-        props.selectX(convertFromCoordinate(setXSystemCoordsForClick(coordX)))
-        props.checkEntry()
+        if(checkR()){
+            const coordX = e.nativeEvent.offsetX
+            const coordY = e.nativeEvent.offsetY
+            props.selectY(convertFromCoordinate(setYSystemCoords(coordY)))
+            props.selectX(convertFromCoordinate(setXSystemCoordsForClick(coordX)))
+            props.checkEntry()
+        }
+        if(props.errorMessage){
+            toastRef.current.show({severity: "error", summary: "Error", detail: props.errorMessage})
+            props.setErrorMessage(undefined)
+        }
     }
 
 
     return (
         <div>
+            <Toast ref={toastRef}/>
+
             <svg onClick={handleClickOnArea} ref={svgDots} width="300" height="300" xmlns="http://www.w3.org/2000/svg">
                 <line x1="0" y1="150" x2="300" y2="150" stroke="black"/>
                 <line x1="150" y1="0" x2="150" y2="300" stroke="black"/>
@@ -102,13 +125,14 @@ const Graph = (props) => {
 
                 <text x="290" y="140">X</text>
                 <text x="160" y="15">Y</text>
-                <text x="200" y="140">R/2</text>
-                <text x="156" y="275">R</text>
-                <text x="75" y="140">R/2</text>
-                <text x="20" y="140">R</text>
-                <text x="156" y="35">R</text>
-                <text x="156" y="95">R/2</text>
-                <text x="156" y="215">R/2</text>
+                <text x="200" y="140">{Math.abs(props.selectedR)/ 2}</text>
+                <text x="156" y="275">-{Math.abs(props.selectedR)}</text>
+                <text x="75" y="140">-{Math.abs(props.selectedR)/ 2}</text>
+                <text x="20" y="140">-{Math.abs(props.selectedR)}</text>
+                <text x="156" y="35">{Math.abs(props.selectedR)}</text>
+                <text x="156" y="95">{Math.abs(props.selectedR)/ 2}</text>
+                <text x="156" y="215">-{(Math.abs(props.selectedR))/2}</text>
+                <text x="265" y="140">{Math.abs(props.selectedR)}</text>
 
                 <rect x="30" y="150" width=" 120" height="120" fill-opacity="0.4" stroke="navy"
                       fill="blue"/>

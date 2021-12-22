@@ -1,6 +1,7 @@
 import {connect} from "react-redux";
 import Graph from "./Graph";
 import {checkEntry, selectX, selectY} from "../../../redux/reducers/sendFormReducer";
+import {setErrorMessage} from "../../../redux/reducers/authReducer";
 
 function mapStateToProps(state){
     return {
@@ -10,7 +11,8 @@ function mapStateToProps(state){
         yMax: state.sendForm.yMax,
         yMin: state.sendForm.yMin,
         xValues: state.sendForm.xValues,
-        entries: state.entriesData.entries
+        entries: state.entriesData.entries,
+        errorMessage: state.auth.errorMessage
     };
 
 }
@@ -20,7 +22,8 @@ function mapDispatchToProps(dispatch){
         {
             selectX: (value)=>dispatch(selectX(value)),
             selectY: (value)=>dispatch(selectY(value)),
-            checkEntry: ()=>dispatch(checkEntry())
+            checkEntry: ()=>dispatch(checkEntry()),
+            setErrorMessage: (value) => dispatch(setErrorMessage(value))
         }
     )
 

@@ -1,6 +1,7 @@
 import {connect} from "react-redux";
 import Check from "./Check";
 import {checkEntry, clearEntries, selectR, selectX, selectY} from "../../../redux/reducers/sendFormReducer";
+import {setErrorMessage} from "../../../redux/reducers/authReducer";
 
 function mapStateToProps(state){
     return {
@@ -10,7 +11,8 @@ function mapStateToProps(state){
         xValues: state.sendForm.xValues,
         yMax: state.sendForm.yMax,
         yMin: state.sendForm.yMin,
-        rValues: state.sendForm.rValues
+        rValues: state.sendForm.rValues,
+        errorMessage: state.auth.errorMessage
     };
 
 }
@@ -22,7 +24,8 @@ function mapDispatchToProps(dispatch){
             selectX:(value)=>dispatch(selectX(value)),
             selectY:(value)=>dispatch(selectY(value)),
             selectR:(value)=>dispatch(selectR(value)),
-            clearEntries: () => dispatch(clearEntries())
+            clearEntries: () => dispatch(clearEntries()),
+            setErrorMessage: (value) => dispatch(setErrorMessage(value))
         }
     )
 

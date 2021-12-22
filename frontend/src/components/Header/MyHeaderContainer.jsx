@@ -2,12 +2,12 @@ import {connect} from "react-redux";
 import MyHeader from "./MyHeader"
 import {logout} from "../../redux/reducers/authReducer";
 
-/*function mapStateToProps(state){
+function mapStateToProps(state){
     return {
         userIsLogged: state.auth.userIsLogged
     };
 
-}*/
+}
 
 function mapDispatchToProps(dispatch){
     return(
@@ -18,4 +18,4 @@ function mapDispatchToProps(dispatch){
 
 }
 
-export default connect(null,mapDispatchToProps)(MyHeader)
+export default connect(mapStateToProps,mapDispatchToProps)(MyHeader)
