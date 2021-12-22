@@ -16,7 +16,7 @@ const Table = (props) => {
                     <th>Результат</th>
                 </tr>
                 { props.entries.map((e)=>{
-                    return <Entry x={e.x} y={e.y} r={e.r} isEntry={e.isEntry}/> })}
+                    return <Entry x={e.x} y={e.y} r={e.r} isEntry={e.entry}/> })}
             </table>
         </div>
     );

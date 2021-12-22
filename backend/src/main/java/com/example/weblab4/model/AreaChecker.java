@@ -25,9 +25,9 @@ public class AreaChecker {
 
     public boolean checkIntoTriangle(float x, float y, float r) {
         if ((x >= 0 && x <= r/2) && (y <= 0 && y >= -r/2)) {
-            float d = ((x - r/2) * (-r/2 - 0))- ((0 - (r/2) )* (y - 0));
+            float d = ((x -0) * (-r/2 -0))- ((0 - (r/2) )* (y +r/2));
             //(x - x1) * (y2 - y1) - (x2 - x1) * (y - y1) = 0
-            if (d <= 0) {
+            if (d >= 0) {
                 return true;
             }
         }

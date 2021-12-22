@@ -1,5 +1,5 @@
 import entriesAPI from "../../API/entriesAPI";
-import {addEntry, deleteEntries, setEntries} from "./entriesReducer";
+import {addEntry, deleteEntries} from "./entriesReducer";
 import {logout} from "./authReducer";
 
 const SELECT_X = "SELECT_X"

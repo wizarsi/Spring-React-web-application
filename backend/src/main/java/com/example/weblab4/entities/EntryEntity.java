@@ -25,6 +25,7 @@ public class EntryEntity {
         private float x;
         private float y;
         private float r;
+        @Column(name="isEntry")
         private boolean isEntry = false;
         private Date dateTime;
 

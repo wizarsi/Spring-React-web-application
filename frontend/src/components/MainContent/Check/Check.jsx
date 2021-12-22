@@ -1,14 +1,30 @@
-import React from 'react';
+import React, {useState} from 'react';
 import MyComboBox from "../../UI/combobox/MyComboBox";
 import MyInput from "../../UI/input/MyInput";
 import MyButton from "../../UI/button/MyButton";
 
 const Check = (props) => {
-
+    const [action,setAction] = useState(undefined)
     const handleSubmit = (event) => {
         event.preventDefault()
-        props.checkEntry();
+        switch (action) {
+            case "check":
+                props.checkEntry();
+                break
+            case "clear":
+                props.clearEntries();
+                break
+        }
     }
+
+    const setCheckAction=()=>{
+        setAction("check")
+    }
+
+    const setClearAction=()=>{
+        setAction("clear")
+    }
+
 
     const changeX = (event)=>{
         props.selectX(event.target.value)
@@ -29,7 +45,8 @@ const Check = (props) => {
                      type="input" onChange={changeY}/>
 
             <MyComboBox onChange={changeR} value={props.selectedR} name = "r" id="r"  options={props.rValues}/>
-            <MyButton>Send</MyButton>
+            <MyButton onClick={setCheckAction}>Check</MyButton>
+            <MyButton onClick={setClearAction}>Clear results</MyButton>
         </form>
     );
 }
