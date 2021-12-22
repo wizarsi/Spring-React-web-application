@@ -1,7 +1,10 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {Navigate} from "react-router-dom";
-import MyInput from "../../UI/input/MyInput";
-import MyButton from "../../UI/button/MyButton";
+import {InputText} from "primereact/inputtext";
+import {Password} from "primereact/password";
+import {Button} from "primereact/button";
+import styles from "./RegisterForm.module.css";
+import {Toast} from "primereact/toast";
 
 
 const RegisterForm = (props) => {
@@ -10,25 +13,75 @@ const RegisterForm = (props) => {
         password: ''
     });
 
+    const toastRef = useRef();
+
+
     const handleSubmit = (event) => {
         event.preventDefault()
-        props.register(formValue.username,formValue.password);
+        if (!formValue.username){
+            toastRef.current.show({severity:"error", summary:"Error",detail:"Name is required"})
+        }else if(!formValue.password){
+            toastRef.current.show({severity:"error", summary:"Error",detail:"Password is required"})
+        }else{
+            props.register(formValue.username, formValue.password);
+            if(props.errorMessage){
+                toastRef.current.show({severity:"error", summary:"Error",detail:props.errorMessage})
+            }
+            props.setErrorMessage(undefined)
+        }
     }
 
     const handleChange = (event) => {
         setFormValue({...formValue, [event.target.name]: event.target.value})
     }
 
-    if(props.userIsLogged){
+    if (props.userIsLogged) {
         return <Navigate to={"/main"}/>
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <MyInput placeholder="username" name = "username" value={formValue.username} id="username" type="text" onChange={handleChange}/>
-            <MyInput placeholder="password" name = "password" value={formValue.password} id="password" type="password" onChange={handleChange}/>
-            <MyButton>Send</MyButton>
-        </form>
+        <div className={styles.loginFormContainer}>
+            <Toast ref={toastRef}/>
+            <form className={styles.loginForm} onSubmit={handleSubmit}>
+                <div>
+                        <InputText style={{
+                            width: "80%",
+                            margin: "0 10%"
+                        }}
+                                   value={formValue.username}
+                                   onChange={handleChange}
+                                   name="username"
+                                   id="username"
+                                   placeholder="Name"
+                        />
+                </div>
+                <br/>
+                <div>
+                    <Password style={{
+                        width: "80%",
+                        margin: "0 10%"
+                    }}
+                              toggleMask={true}
+                              feedback={true}
+                              value={formValue.password}
+                              onChange={handleChange}
+                              name="password"
+                              placeholder="Password"
+                    />
+                </div>
+                <br/>
+                <div>
+                    <Button style={{
+                        width: "60%",
+                        margin: "0 20%"
+                    }}
+                            label="Register"/>
+                </div>
+
+                <br/>
+
+            </form>
+        </div>
     );
 }
 

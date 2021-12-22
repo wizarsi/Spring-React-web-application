@@ -4,6 +4,7 @@ import com.example.weblab4.POJO.Requests.CheckDotRequest;
 import com.example.weblab4.POJO.Responses.MessageResponse;
 import com.example.weblab4.entities.EntryEntity;
 import com.example.weblab4.entities.UserEntity;
+import com.example.weblab4.exceptions.NotIncludedInTheRangeException;
 import com.example.weblab4.model.AreaChecker;
 import com.example.weblab4.repositories.EntriesRepository;
 import com.example.weblab4.services.auth.UserService;
@@ -26,7 +27,7 @@ public class EntriesService {
     @Autowired
     private AreaChecker areaChecker;
 
-    public EntryEntity addDot(CheckDotRequest checkDotRequest, String username) {
+    public EntryEntity addDot(CheckDotRequest checkDotRequest, String username) throws NotIncludedInTheRangeException {
         EntryEntity entryEntity = areaChecker.checkEntry(checkDotRequest);
         entryEntity.setUserEntity(userService.getUserByUsername(username));
         return entriesRepository.save(entryEntity);

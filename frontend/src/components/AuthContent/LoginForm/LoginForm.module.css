@@ -1,0 +1,32 @@
+.loginFormContainer{
+    height: 50%;
+    width: 30%;
+    margin: 10% 35%;
+}
+
+.loginForm{
+    padding: 30px;
+}
+/*
+.inputForm{
+    width: 80%;
+    margin: 0 5px 10% 10%;
+}
+
+.buttonForm{
+    text-align: center;
+    width: 60%;
+    margin: 0 5px 20% 20%;
+}*/
+
+.signRegister{
+    text-align: right;
+    text-decoration: none;
+    color: black;
+}
+
+.signRegisterText{
+    color: black;
+    margin-right: 10%;
+}
+

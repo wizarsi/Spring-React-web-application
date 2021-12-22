@@ -6,7 +6,7 @@ import LoginFormContainer from "../../AuthContent/LoginForm/LoginFormContainer";
 const LoginPage = () => {
 
     return (
-        <div className={styles.signupWrapper}>
+        <div className={styles.loginWrapper}>
             <LoginFormContainer/>
         </div>
     )

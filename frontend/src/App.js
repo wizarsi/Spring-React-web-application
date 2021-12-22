@@ -4,16 +4,22 @@ import {routes, AppRoute} from "./security/routes"
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import MyHeaderContainer from "./components/Header/MyHeaderContainer";
 
-const App = ()=>{
+const App = () => {
     return (<BrowserRouter>
+            <div>
                 <MyHeaderContainer/>
+            </div>
+            <div>
                 <Routes>
                     {
-                        routes.map((route)=>{
-                            return <Route path={route.path}  element={<AppRoute component={route.component} isPrivate={route.isPrivate}/>}/>
+                        routes.map((route) => {
+                            return <Route path={route.path} element={<AppRoute component={route.component}
+                                                                               isPrivate={route.isPrivate}/>}/>
                         })
                     }
                 </Routes>
+            </div>
+
         </BrowserRouter>
     )
 }

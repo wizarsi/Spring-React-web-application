@@ -1,8 +1,14 @@
 package com.example.weblab4.POJO.Requests;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+
 public class CheckDotRequest {
+
     private float x;
+
     private float y;
+
     private float r;
 
     public float getX() {

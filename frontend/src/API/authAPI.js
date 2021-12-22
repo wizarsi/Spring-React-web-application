@@ -4,7 +4,9 @@ const axiosInstance = axios.create({
     baseURL: 'http://localhost:8080/web-lab4/api/auth/',
     headers: {
         "Content-Type": "application/json",
-    },
+        "access-control-allow-origin": "*"
+
+},
 });
 
 const authAPI = {

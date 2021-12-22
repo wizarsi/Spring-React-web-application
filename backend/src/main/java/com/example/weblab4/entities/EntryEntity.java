@@ -4,8 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.util.Date;
 
 @Getter
@@ -22,6 +25,8 @@ public class EntryEntity {
         @JoinColumn(name = "user_id")
         @JsonIgnore
         private UserEntity userEntity;
+
+
         private float x;
         private float y;
         private float r;

@@ -7,9 +7,13 @@ import GraphContainer from "../../MainContent/Graph/GraphContainer";
 const MainPage = ()=>{
     return (
         <div className={styles.mainWrapper}>
-            <GraphContainer/>
-            <CheckContainer/>
-            <TableContainer/>
+            <div className={styles.control}>
+                <GraphContainer/>
+                <CheckContainer/>
+            </div>
+            <div className={styles.tableResults}>
+                <TableContainer/>
+            </div>
         </div>
     )
 }

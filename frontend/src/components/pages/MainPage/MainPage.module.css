@@ -1,3 +1,17 @@
 .mainWrapper{
 
 }
+
+.control{
+    width: 40%;
+    height: 100%;
+    float: left;
+}
+
+
+.tableResults {
+    width: 60%;
+    height: 100%;
+    position: relative;
+    float: right;
+}

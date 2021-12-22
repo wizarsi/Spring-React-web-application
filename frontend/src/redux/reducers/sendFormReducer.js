@@ -67,6 +67,7 @@ export const checkEntry = () => (dispatch, getState) => {
         getState().sendForm.selectedY, getState().sendForm.selectedR, token)
         .then(response => {
                 if (response.status === 200) {
+                    /*response.data.entry = response.data.entry?"Поподание":"Промах";*/
                     dispatch(addEntry(response.data))
                 } else {
                     console.log("Ошибка авторизации с кодом " + response.status)

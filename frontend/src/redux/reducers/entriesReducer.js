@@ -58,6 +58,9 @@ export const getEntries = () => (dispatch) => {
     entriesAPI.getEntriesRequest(token)
         .then(response => {
                 if (response.status === 200) {
+                    /*response.data.forEach(e => {
+                        e.entry = e.entry?"Поподание":"Промах";
+                    })*/
                     dispatch(setEntries(response.data))
                 } else if(response.status === 401) {
                     dispatch(logout())

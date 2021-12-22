@@ -1,7 +1,14 @@
 import React, {useState} from 'react';
-import MyComboBox from "../../UI/combobox/MyComboBox";
-import MyInput from "../../UI/input/MyInput";
-import MyButton from "../../UI/button/MyButton";
+
+import "primereact/resources/themes/lara-light-blue/theme.css";  //theme
+import "primereact/resources/primereact.min.css";                  //core css
+import "primeicons/primeicons.css";
+import {InputText} from "primereact/inputtext";
+import {Button} from "primereact/button";
+import {Dropdown} from "primereact/dropdown";
+
+import styles from "./Check.module.css"
+
 
 const Check = (props) => {
     const [action,setAction] = useState(undefined)
@@ -39,14 +46,32 @@ const Check = (props) => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <MyComboBox name = "x" id="x" onChange={changeX} value={props.selectedX} options={props.xValues}/>
-            <MyInput placeholder="(-3...3)" name = "y" value={props.selectedY} id="y"
-                     type="input" onChange={changeY}/>
+        <form className={styles.form} onSubmit={handleSubmit}>
+            <div>
+                <Dropdown name = "x" id="x"
+                          value={props.selectedX} options={props.xValues}
+                          onChange={changeX} placeholder="Select x"/>
+            </div>
+            <br/>
+            <div>
+                <InputText
+                    placeholder="(-3...3)" name = "y" value={props.selectedY} id="y"
+                    type="input" onChange={changeY}
+                />
+            </div>
+           <br/>
+            <div>
+                <Dropdown name = "r" id="r"
+                          value={props.selectedR} options={props.rValues}
+                          onChange={changeR} placeholder="Select r"/>
+            </div>
+           <br/>
+            <div>
+                <Button className={styles.button} onClick={setCheckAction} label="Check"/>
+                <Button className={styles.button} onClick={setClearAction} label="Clear results"/>
+            </div>
 
-            <MyComboBox onChange={changeR} value={props.selectedR} name = "r" id="r"  options={props.rValues}/>
-            <MyButton onClick={setCheckAction}>Check</MyButton>
-            <MyButton onClick={setClearAction}>Clear results</MyButton>
+
         </form>
     );
 }

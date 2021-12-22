@@ -1,14 +1,12 @@
 package com.example.weblab4.services.auth;
 
 import com.example.weblab4.POJO.Requests.AuthRequest;
-import com.example.weblab4.POJO.Requests.CheckDotRequest;
 import com.example.weblab4.POJO.Responses.JwtResponse;
 import com.example.weblab4.entities.EnumRole;
 import com.example.weblab4.entities.RoleEntity;
 import com.example.weblab4.entities.UserEntity;
+import com.example.weblab4.exceptions.EmptyFieldException;
 import com.example.weblab4.exceptions.UserAlreadyExistException;
-import com.example.weblab4.exceptions.UserNotFoundException;
-import com.example.weblab4.exceptions.UserWrongPasswordException;
 import com.example.weblab4.repositories.RoleRepository;
 import com.example.weblab4.repositories.UserRepository;
 import com.example.weblab4.security.jwt.JwtUtils;
@@ -46,9 +44,13 @@ public class UserService {
         return userRepository.findByUsername(username).get();
     }
 
-    public void register(AuthRequest authRequest) throws UserAlreadyExistException {
+    public void register(AuthRequest authRequest) throws UserAlreadyExistException, EmptyFieldException {
         if (userRepository.existsByUsername(authRequest.getUsername())) {
-            throw new UserAlreadyExistException("Пользователь c таким именем уже существует");
+            throw new UserAlreadyExistException("A user with the same name already exists");
+        }
+
+        if(authRequest.getUsername().length() ==0 || authRequest.getPassword().length() ==0){
+            throw new EmptyFieldException("username and password should not be empty");
         }
 
         UserEntity user = new UserEntity(authRequest.getUsername(),
@@ -92,7 +94,10 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public JwtResponse login(AuthRequest authRequest) throws UserNotFoundException, UserWrongPasswordException {
+    public JwtResponse login(AuthRequest authRequest) throws EmptyFieldException {
+        if(authRequest.getUsername().length() ==0 || authRequest.getPassword().length() ==0){
+            throw new EmptyFieldException("username and password should not be empty");
+        }
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(
                         authRequest.getUsername(),
