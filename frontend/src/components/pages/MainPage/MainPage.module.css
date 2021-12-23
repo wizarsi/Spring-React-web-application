@@ -1,17 +1,36 @@
-.mainWrapper{
 
+@media only screen
+and (min-width : 950px)
+and (max-width : 1920px){
+    .mainWrapper{
+        display:grid;
+        grid-template-columns: 1fr 2fr;
+        margin-top: 10px;
+
+    }
 }
 
-.control{
-    width: 40%;
-    height: 100%;
-    float: left;
+@media only screen
+and (min-width : 0px)
+and (max-width : 950px){
+    .mainWrapper{
+        display:grid;
+        grid-template-rows: auto auto;
+        margin-top: 10px;
+
+    }
+}
+@media only screen
+and (min-width : 650px)
+and (max-width : 950px){
+    .mainWrapper{
+        display:grid;
+        grid-template-rows: auto auto;
+        margin-top: 10px;
+
+    }
 }
 
 
-.tableResults {
-    width: 60%;
-    height: 100%;
-    position: relative;
-    float: right;
-}
+
+

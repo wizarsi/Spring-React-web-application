@@ -46,6 +46,23 @@ public class EntriesService {
         return entries;
     }
 
+    public List<EntryEntity> getUpdateRDots(float r,String username) {
+        UserEntity userEntity = userService.getUserByUsername(username);
+        List<EntryEntity> entries =entriesRepository.findAllByUserEntity(userEntity);
+        Collections.sort(entries,
+                new Comparator<EntryEntity>() {
+                    @Override
+                    public int compare(EntryEntity o1, EntryEntity o2) {
+                        return o1.getDateTime().compareTo(o2.getDateTime());
+                    }
+                });
+        for (EntryEntity entry:entries) {
+            entry.setR(r);
+            entry.setEntry(areaChecker.checkGetInto(entry.getX(),entry.getY(),r));
+        }
+        return entries;
+    }
+
     public long deleteDots(String username){
         UserEntity userEntity = userService.getUserByUsername(username);
         return entriesRepository.deleteAllByUserEntity(userEntity);

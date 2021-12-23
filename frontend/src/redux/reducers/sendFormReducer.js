@@ -1,5 +1,5 @@
 import entriesAPI from "../../API/entriesAPI";
-import {addEntry, deleteEntries} from "./entriesReducer";
+import {addEntry, deleteEntries, getEntriesForGraph} from "./entriesReducer";
 import {logout, setErrorMessage} from "./authReducer";
 
 const SELECT_X = "SELECT_X"
@@ -69,6 +69,7 @@ export const checkEntry = () => (dispatch, getState) => {
                 if (response.status === 200) {
                     /*response.data.entry = response.data.entry?"Поподание":"Промах";*/
                     dispatch(addEntry(response.data))
+                    dispatch(getEntriesForGraph())
                 } else {
                     console.log("Ошибка авторизации с кодом " + response.status)
                 }

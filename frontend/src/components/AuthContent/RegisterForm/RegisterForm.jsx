@@ -1,5 +1,5 @@
 import React, {useRef} from 'react';
-import {Navigate} from "react-router-dom";
+import {Navigate, NavLink} from "react-router-dom";
 import {InputText} from "primereact/inputtext";
 import {Password} from "primereact/password";
 import {Button} from "primereact/button";
@@ -40,9 +40,9 @@ const RegisterForm = (props) => {
     }
 
     return (
-        <div className={styles.loginFormContainer}>
+        <div className={styles.registerFormContainer}>
             <Toast ref={toastRef}/>
-            <form className={styles.loginForm} onSubmit={handleSubmit}>
+            <form className={styles.registerForm} onSubmit={handleSubmit}>
                 <div>
                         <InputText style={{
                             width: "80%",
@@ -79,7 +79,7 @@ const RegisterForm = (props) => {
                 </div>
 
                 <br/>
-
+                <div className={styles.signBackText}><NavLink to={"/login"} className={styles.signBackText}>back</NavLink></div>
             </form>
         </div>
     );

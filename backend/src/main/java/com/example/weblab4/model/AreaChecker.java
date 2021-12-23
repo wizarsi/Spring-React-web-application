@@ -31,9 +31,6 @@ public class AreaChecker {
         return new EntryEntity(checkDotRequest.getX(), checkDotRequest.getY(), checkDotRequest.getR(), entryValue, date);
     }
 
-    public void validate(){
-
-    }
 
     public boolean checkGetInto(float x, float y, float r) {
         if (checkIntoTriangle(x, y, r) || checkIntoRectangle(x, y, r) || checkIntoCircle(x, y, r)) {

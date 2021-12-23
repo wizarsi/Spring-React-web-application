@@ -9,6 +9,7 @@ import {Dropdown} from "primereact/dropdown";
 
 import styles from "./Check.module.css"
 import {Toast} from "primereact/toast";
+import {selectX} from "../../../redux/reducers/sendFormReducer";
 
 
 const Check = (props) => {
@@ -22,6 +23,7 @@ const Check = (props) => {
                 break
             case "clear":
                 props.clearEntries();
+                props.clearEntriesForGraph()
                 break
         }
     }
@@ -87,6 +89,8 @@ const Check = (props) => {
 
     const changeR = (event) => {
         props.selectR(event.target.value)
+        props.getEntriesForGraph()
+
     }
 
     return (

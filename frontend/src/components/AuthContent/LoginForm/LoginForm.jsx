@@ -21,14 +21,14 @@ const LoginForm = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        if (!formValue.username){
-            toastRef.current.show({severity:"error", summary:"Error",detail:"Name is required"})
-        }else if(!formValue.password){
-            toastRef.current.show({severity:"error", summary:"Error",detail:"Password is required"})
-        }else{
+        if (!formValue.username) {
+            toastRef.current.show({severity: "error", summary: "Error", detail: "Name is required"})
+        } else if (!formValue.password) {
+            toastRef.current.show({severity: "error", summary: "Error", detail: "Password is required"})
+        } else {
             props.login(formValue.username, formValue.password);
-            if(props.errorMessage){
-                toastRef.current.show({severity:"error", summary:"Error",detail:props.errorMessage})
+            if (props.errorMessage) {
+                toastRef.current.show({severity: "error", summary: "Error", detail: props.errorMessage})
             }
             props.setErrorMessage(undefined)
         }

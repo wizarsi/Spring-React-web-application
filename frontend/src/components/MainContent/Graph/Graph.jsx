@@ -10,20 +10,22 @@ const Graph = (props) => {
 
     useEffect(() => {
         clearDots()
-        fillPointsToArea(props.entries)
-    })
+        props.getEntriesForGraph()
+    },[])
 
-    const checkR = ()=>{
+
+
+    const checkR = () => {
         let message = "R cannot be negative or 0"
         if (props.selectedR <= 0) {
-             toastRef.current.show({severity: "error", summary: "Error", detail: message})
+            toastRef.current.show({severity: "error", summary: "Error", detail: message})
             return false
         }
         return true
     }
 
     const fillPointsToArea = (entries) => {
-        if (checkR()){
+        if (props.selectedR > 0) {
             entries.forEach(e => {
                 drawPoint(e.x, e.y, e.r, e.entry)
             })
@@ -67,10 +69,10 @@ const Graph = (props) => {
 
 
     const convertFromCoordinate = (value) => {
-        return (value * Math.abs(props.selectedR)) / 120;
+        return (value * props.selectedR) / 120;
     }
     const convertToCoordinate = (value) => {
-        return (value * 120) / Math.abs(props.selectedR);
+        return (value * 120) / props.selectedR;
     }
 
     const drawPoint = (x, y, r, isEntry) => {
@@ -93,19 +95,23 @@ const Graph = (props) => {
 
 
     const handleClickOnArea = (e) => {
-        if(checkR()){
+        if (checkR()) {
             const coordX = e.nativeEvent.offsetX
             const coordY = e.nativeEvent.offsetY
             props.selectY(convertFromCoordinate(setYSystemCoords(coordY)))
             props.selectX(convertFromCoordinate(setXSystemCoordsForClick(coordX)))
             props.checkEntry()
         }
-        if(props.errorMessage){
+        if (props.errorMessage) {
             toastRef.current.show({severity: "error", summary: "Error", detail: props.errorMessage})
             props.setErrorMessage(undefined)
         }
     }
 
+    if(props.entriesForGraph){
+        clearDots()
+        fillPointsToArea(props.entriesForGraph)
+    }
 
     return (
         <div>
@@ -125,13 +131,13 @@ const Graph = (props) => {
 
                 <text x="290" y="140">X</text>
                 <text x="160" y="15">Y</text>
-                <text x="200" y="140">{Math.abs(props.selectedR)/ 2}</text>
+                <text x="200" y="140">{Math.abs(props.selectedR) / 2}</text>
                 <text x="156" y="275">-{Math.abs(props.selectedR)}</text>
-                <text x="75" y="140">-{Math.abs(props.selectedR)/ 2}</text>
+                <text x="75" y="140">-{Math.abs(props.selectedR) / 2}</text>
                 <text x="20" y="140">-{Math.abs(props.selectedR)}</text>
                 <text x="156" y="35">{Math.abs(props.selectedR)}</text>
-                <text x="156" y="95">{Math.abs(props.selectedR)/ 2}</text>
-                <text x="156" y="215">-{(Math.abs(props.selectedR))/2}</text>
+                <text x="156" y="95">{Math.abs(props.selectedR) / 2}</text>
+                <text x="156" y="215">-{(Math.abs(props.selectedR)) / 2}</text>
                 <text x="265" y="140">{Math.abs(props.selectedR)}</text>
 
                 <rect x="30" y="150" width=" 120" height="120" fill-opacity="0.4" stroke="navy"

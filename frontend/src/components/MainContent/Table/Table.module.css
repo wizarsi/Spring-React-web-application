@@ -1,4 +1,9 @@
 
-.tableContainer{
-
+@media only screen
+and (min-width : 0px)
+and (max-width : 650px){
+    .tableContainer{
+        width:300px;
+        margin:10px auto;
+    }
 }

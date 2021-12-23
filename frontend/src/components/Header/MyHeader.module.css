@@ -1,34 +1,59 @@
-.header {
-    background-color: deepskyblue;
-    margin-top: 0;
-    margin-left: 0;
-    width: 100%;
-    height: 65px;
-    position:relative;
-    flex-direction: row;
+
+@media only screen
+and (min-width : 0px)
+and (max-width : 1920px){
+    .header {
+        background-color: deepskyblue;
+        margin-top: 0;
+        margin-left: 0;
+        height: 70px;
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr;
+        grid-auto-rows: minmax(auto, auto);
+        justify-items: stretch;
+    }
 }
+
 .userSign{
-    position: absolute;
-    left:91%;
-    margin-top:21px;
+    margin: 5px;
+
 }
 
 .logo {
-    position:absolute;
-    left:0;
-    top:0;
+    padding:2px;
 }
 
-.logout {
-    display:inline-block;
-    position:absolute;
-    right:0;
-    top:0;
-    padding: 15px;
+.logoutWrapper {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    justify-items: self-end;
+    padding:20px;
 }
 
-.aboutInfo {
-    width: 40%;
-    position:absolute;
-    left:40%;
+@media (min-width: 850px) and (max-width: 1920px) {
+    .aboutInfo {
+        display: grid;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-auto-rows: minmax(65px, 65px);
+        text-align: center;
+    }
+}
+
+@media only screen
+and (min-width : 0px)
+and (max-width : 850px) {
+    .aboutInfo {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        text-align: center;
+    }
+}
+
+@media only screen
+and (min-width : 100px)
+and (max-width : 415px){
+    .aboutInfo{
+        visibility:hidden;
+        display:none;
+    }
 }

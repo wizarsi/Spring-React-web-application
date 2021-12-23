@@ -33,6 +33,11 @@ public class EntriesController {
         return ResponseEntity.ok(entriesService.getDots(principal.getName()));
     }
 
+    @GetMapping("/getEntriesForGraph")
+    public ResponseEntity<?> getEntries(@RequestParam("r") float r, Principal principal){
+        return ResponseEntity.ok(entriesService.getUpdateRDots(r,principal.getName()));
+    }
+
     @DeleteMapping("/clearEntries")
     public ResponseEntity<?> clearEntries( Principal principal){
         return ResponseEntity.ok(entriesService.deleteDots(principal.getName()));

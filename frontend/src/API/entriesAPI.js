@@ -12,31 +12,40 @@ const entriesAPI = {
         const data = {
             "x": x,
             "y": y,
-            "r":r
+            "r": r
         }
-        const config={
-            headers:{
-                Authorization: "Bearer "+token,
+        const config = {
+            headers: {
+                Authorization: "Bearer " + token,
             }
         }
         return await axiosInstance.post("check", data, config);
 
     },
     async getEntriesRequest(token) {
-        const config={
-            headers:{
-                Authorization: "Bearer "+token,
+        const config = {
+            headers: {
+                Authorization: "Bearer " + token,
             }
         }
-        return await axiosInstance.get("getEntries",config);
+        return await axiosInstance.get("getEntries", config);
 
-    },async clearEntriesRequest(token) {
-        const config={
-            headers:{
-                Authorization: "Bearer "+token,
+    }, async clearEntriesRequest(token) {
+        const config = {
+            headers: {
+                Authorization: "Bearer " + token,
             }
         }
-        return await axiosInstance.delete("clearEntries",config);
+        return await axiosInstance.delete("clearEntries", config);
+
+    }, async getEntriesForGraphRequest(radius, token) {
+        const config = {
+            headers: {
+                Authorization: "Bearer " + token,
+            },
+            params: { r: radius }
+        }
+        return await axiosInstance.get("getEntriesForGraph", config);
 
     },
 

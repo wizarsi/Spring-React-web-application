@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
 import styles from "./Table.module.css"
-import Entry from "./Entry/Entry";
 import {DataTable} from "primereact/datatable";
 import {Column} from "primereact/column";
 
@@ -22,12 +21,15 @@ const Table = (props) => {
         return <span>{rowData.entry?"Поподание":"Промах"}</span>;
     }
     return (
-        <div className={styles.tableContainer}>
-            <DataTable value={props.entries} responsiveLayout="scroll">
-                {dynamicColumns}
-                <Column key="entry" field="entry" body={entryToText} header="Результат" />
-            </DataTable>
+        <div>
+            <div className={styles.tableContainer}>
+                <DataTable value={props.entries} responsiveLayout="scroll">
+                    {dynamicColumns}
+                    <Column key="entry" field="entry" body={entryToText} header="Результат" />
+                </DataTable>
+            </div>
         </div>
+
     );
 }
 

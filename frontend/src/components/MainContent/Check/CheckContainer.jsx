@@ -2,6 +2,12 @@ import {connect} from "react-redux";
 import Check from "./Check";
 import {checkEntry, clearEntries, selectR, selectX, selectY} from "../../../redux/reducers/sendFormReducer";
 import {setErrorMessage} from "../../../redux/reducers/authReducer";
+import {
+    addEntry,
+    addEntryForGraph,
+    deleteEntriesForGraph,
+    getEntriesForGraph
+} from "../../../redux/reducers/entriesReducer";
 
 function mapStateToProps(state){
     return {
@@ -25,7 +31,12 @@ function mapDispatchToProps(dispatch){
             selectY:(value)=>dispatch(selectY(value)),
             selectR:(value)=>dispatch(selectR(value)),
             clearEntries: () => dispatch(clearEntries()),
-            setErrorMessage: (value) => dispatch(setErrorMessage(value))
+            setErrorMessage: (value) => dispatch(setErrorMessage(value)),
+            getEntriesForGraph:()=> dispatch(getEntriesForGraph()),
+            clearEntriesForGraph: () => dispatch(deleteEntriesForGraph()),
+            addEntryForGraph: () => dispatch(addEntryForGraph()),
+
+
         }
     )
 
